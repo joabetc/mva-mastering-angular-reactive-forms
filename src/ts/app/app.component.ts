@@ -1,25 +1,28 @@
 import { Component } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
     selector: "main",
-    template: `
+    template: `<form [formGroup]="profileForm">
         <div>
             <label for="first-name-input">First Name:</label>
-            <input type="text" id="first-name-input" [formControl]="firstNameInput">
-            <br>Value: {{firstNameInput.value}}
+            <input type="text" id="first-name-input" formControlName="firstNameInput">
+            <br>Value: {{profileForm.controls['firstNameInput'].value}}
         </div>
         <div>
             <label for="last-name-input">Last Name:</label>
-            <input type="text" id="last-name-input" [formControl]="lastNameInput">
-            <br>Value: {{lastNameInput.value}}
+            <input type="text" id="last-name-input" formControlName="lastNameInput">
+            <br>Value: {{profileForm.controls['lastNameInput'].value}}
         </div>
+    </form>
     `,
 })
 export class AppComponent {
 
-    public firstNameInput:  FormControl = new FormControl("");
-    public lastNameInput: FormControl = new  FormControl("");
+    public profileForm: FormGroup = new FormGroup({
+        firstNameInput: new FormControl(""),
+        lastNameInput: new FormControl(""),
+    });
 
     public message: string = "Hello World!";
 
